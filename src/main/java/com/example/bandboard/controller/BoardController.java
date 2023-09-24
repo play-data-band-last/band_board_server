@@ -1,6 +1,7 @@
 package com.example.bandboard.controller;
 
 import com.example.bandboard.domain.request.BoardRequest;
+import com.example.bandboard.domain.request.LikeCountUpdateRequest;
 import com.example.bandboard.domain.request.MemberUpdateRequest;
 import com.example.bandboard.domain.response.BoardResponse;
 import com.example.bandboard.service.BoardService;
@@ -38,10 +39,9 @@ public class BoardController{
         boardService.updateBoardMember(memberUpdateRequest, memberId);
     }
 
-    @PutMapping("/likeCountUpdate/{boardId}")
-    public void updateLikeCount(@PathVariable("boardId") UUID boardId,
-                                @RequestBody Integer count) {
-        boardService.likeCountUpdate(boardId, count);
+    @PutMapping("/likeCountUpdate")
+    public void updateLikeCount(@RequestBody LikeCountUpdateRequest likeCountUpdateDto) {
+        boardService.likeCountUpdate(likeCountUpdateDto);
     }
 
     @PostMapping("/{communityId}")

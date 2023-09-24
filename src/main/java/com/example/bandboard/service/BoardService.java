@@ -2,6 +2,7 @@ package com.example.bandboard.service;
 
 import com.example.bandboard.domain.entity.Board;
 import com.example.bandboard.domain.request.BoardRequest;
+import com.example.bandboard.domain.request.LikeCountUpdateRequest;
 import com.example.bandboard.domain.request.MemberUpdateRequest;
 import com.example.bandboard.domain.response.BoardResponse;
 import com.example.bandboard.repository.BoardRepository;
@@ -48,16 +49,9 @@ public class BoardService {
         }
     }
     @Transactional
-    public void likeCountUpdate(UUID boardId, Integer count) {
-        System.out.println("서비스까지 오네 ?");
-        System.out.println(boardId);
-        System.out.println(count);
-        Board board = boardRepository.findById(boardId).get();
-
-        System.out.println(board.getLikeCount());
-        System.out.println(count);
-
-        board.setLikeCount(board.getLikeCount() + count);
+    public void likeCountUpdate(LikeCountUpdateRequest likeCountUpdateRequest) {
+        Board board = boardRepository.findById(likeCountUpdateRequest.getBoardId()).get();
+        board.setLikeCount(board.getLikeCount() + likeCountUpdateRequest.getCount());
     }
 
     public Page<BoardResponse> findBycommunityId(Long communityId, PageRequest pageRequest){
