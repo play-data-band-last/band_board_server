@@ -5,5 +5,6 @@ import org.springframework.stereotype.Component;
 @Component
 public class TopicConfig {
     public final static String board = "board";
+    public final static String boardUpdate = "boardUpdate";
 
 }

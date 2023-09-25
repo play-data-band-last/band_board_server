@@ -36,7 +36,8 @@ public class BoardController{
     @PutMapping("/updatemember/{memberId}")
     public void updateMemberBoard(@PathVariable("memberId")Long memberId,
                                   @RequestBody MemberUpdateRequest memberUpdateRequest) throws Exception {
-        boardService.updateBoardMember(memberUpdateRequest, memberId);
+        memberUpdateRequest.setMemberId(memberId);
+        boardService.updateBoardMember(memberUpdateRequest);
     }
 
     @PutMapping("/likeCountUpdate")

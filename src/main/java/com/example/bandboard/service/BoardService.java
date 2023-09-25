@@ -37,13 +37,16 @@ public class BoardService {
     //유저가 업데이트 하면 게시판의 멤버 정보도 업데이트 돼야함
     //동적쿼리까지 쓸 필요는 없을 것 같아서 하드코딩함. 하지만 멤버 정보를 더 늘린다면 하드코딩은 부담스럽고 동적쿼리를 써야할 것 같음(mybatis, queryDsl)
     @Transactional
-    public void updateBoardMember(MemberUpdateRequest memberUpdateRequest, Long memberId) throws Exception {
+    public void updateBoardMember(MemberUpdateRequest memberUpdateRequest) throws Exception {
         if (memberUpdateRequest.getMemberImage() != null && memberUpdateRequest.getMemberName() !=null ){
-            boardRepository.updateBoardMemberImageAndMemberName(memberUpdateRequest.getMemberName(), memberUpdateRequest.getMemberImage(), memberId);
+            boardRepository.updateBoardMemberImageAndMemberName(memberUpdateRequest.getMemberName(), memberUpdateRequest.getMemberImage(), memberUpdateRequest.getMemberId());
+
         } else if (memberUpdateRequest.getMemberImage()!=null && memberUpdateRequest.getMemberName() ==null) {
-            boardRepository.updateBoardMemberImage(memberUpdateRequest.getMemberImage(),memberId);
+            boardRepository.updateBoardMemberImage(memberUpdateRequest.getMemberImage(),memberUpdateRequest.getMemberId());
+
         } else if (memberUpdateRequest.getMemberImage()==null && memberUpdateRequest.getMemberName() != null) {
-            boardRepository.updateBoardMemberName(memberUpdateRequest.getMemberName(), memberId);
+            boardRepository.updateBoardMemberName(memberUpdateRequest.getMemberName(), memberUpdateRequest.getMemberId());
+
         } else {
             throw new Exception("NULL REQUEST");
         }
