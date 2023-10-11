@@ -6,6 +6,7 @@ import com.example.bandboard.service.BoardService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.kafka.annotation.DltHandler;
 import org.springframework.kafka.annotation.KafkaListener;
+import org.springframework.kafka.annotation.RetryableTopic;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -13,11 +14,12 @@ import org.springframework.stereotype.Service;
 public class BoardConsumer {
     private final BoardService boardService;
 
+    @RetryableTopic
     @KafkaListener(topics = TopicConfig.board)
     public void listen(LikeCountUpdateRequest likeCountUpdateRequest) {
        boardService.likeCountUpdate(likeCountUpdateRequest);
     }
-
+    @RetryableTopic
     @KafkaListener(topics = TopicConfig.memberUpdate)
     public void updateBoardMember(MemberUpdateRequest memberUpdateRequest) throws Exception {
         boardService.updateBoardMember(memberUpdateRequest);
