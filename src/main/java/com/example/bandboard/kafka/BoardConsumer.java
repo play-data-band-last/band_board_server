@@ -25,6 +25,12 @@ public class BoardConsumer {
         boardService.updateBoardMember(memberUpdateRequest);
     }
 
+    @RetryableTopic
+    @KafkaListener(topics = TopicConfig.memberDelete)
+    public void memberDeleteListner(Long userId) throws Exception {
+        boardService.deleteMemberHandler(userId);
+    }
+
     @DltHandler
     public void processDltMessage(String dltMessage) {
         // DLT 토픽에서 메시지를 처리합니다. (예: 로깅 또는 추가 조사)

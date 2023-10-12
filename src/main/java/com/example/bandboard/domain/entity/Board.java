@@ -23,6 +23,6 @@ public class Board {
     private String memberName;
     private Long communityId;
     private int likeCount;
-
+    private Boolean isValid = Boolean.TRUE;
 
 }
