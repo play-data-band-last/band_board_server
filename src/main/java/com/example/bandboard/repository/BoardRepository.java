@@ -40,4 +40,9 @@ public interface BoardRepository extends JpaRepository<Board, UUID> {
             "where b.memberId = :memberId")
     void updateBoardMemberImageAndMemberName(@Param("memberName") String memberName, @Param("memberImage") String memberImage, @Param("memberId") Long memberId);
 
+    @Modifying
+    @Query("update Board b " +
+            "set b.isValid = false ," +
+            "where b.memberId = :memberId")
+    void memberDelete(@Param("memberId") Long userId);
 }

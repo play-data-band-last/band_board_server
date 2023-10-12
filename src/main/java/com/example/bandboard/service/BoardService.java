@@ -69,8 +69,7 @@ public class BoardService {
 
     @Transactional
     public void deleteMemberHandler(Long userId){
-        Board board = boardRepository.findByMemberId(userId).get();
-        board.setIsValid(Boolean.FALSE);
+        boardRepository.memberDelete(userId);
     }
 
 }
