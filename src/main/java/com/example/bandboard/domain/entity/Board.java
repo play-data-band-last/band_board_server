@@ -23,6 +23,7 @@ public class Board {
     private String memberName;
     private Long communityId;
     private int likeCount;
+    @Builder.Default
     private Boolean isValid = Boolean.TRUE;
 
 }
