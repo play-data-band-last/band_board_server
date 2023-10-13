@@ -27,9 +27,10 @@ public class BoardConsumer {
 
     @RetryableTopic
     @KafkaListener(topics = TopicConfig.memberDelete)
-    public void memberDeleteListner(Long userId) throws Exception {
-        boardService.deleteMemberHandler(userId);
+    public void memberDeleteListener(MemberUpdateRequest memberUpdateRequest) {
+        boardService.deleteMemberHandler(memberUpdateRequest.getMemberId());
     }
+
 
     @DltHandler
     public void processDltMessage(String dltMessage) {
