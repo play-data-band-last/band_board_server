@@ -3,9 +3,9 @@
 spring:
 
   kafka:
-    bootstrap-servers: localhost:9092
+    bootstrap-servers: 34.42.237.145:9093
     consumer:
-      auto-offset-reset: earliest
+      auto-offset-reset: latest
       group-id: board
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       value-deserializer: org.apache.kafka.common.serialization.ByteArrayDeserializer
@@ -16,31 +16,31 @@ spring:
       value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
 
   datasource:
-    url: jdbc:mysql://localhost:3306/board?serverTimezone=Asia/Seoul
+    url: jdbc:mysql://34.42.237.145:3306/board?serverTimezone=Asia/Seoul
     username: root
     password: 1234
   jpa:
     hibernate:
       ddl-auto: update
     show-sql: true
-  application:
-    name: BAND-BOARD-SERVICE
+#  application:
+#    name: BAND-BOARD-SERVICE
 
 
 server:
-  port: 0
-
-management:
-  endpoints:
-    web:
-      exposure:
-        include: health,beans,refresh
-
-eureka:
-  client:
-    serviceUrl:
-      defaultZone: http://localhost:8761/eureka
-  instance:
-    instanceId: ${spring.application.name}:${vcap.application.instance_id:${spring.application.instance_id:${random.value}}}
-
+  port: 8000
+#
+#management:
+#  endpoints:
+#    web:
+#      exposure:
+#        include: health,beans,refresh
+#
+#eureka:
+#  client:
+#    serviceUrl:
+#      defaultZone: http://localhost:8761/eureka
+#  instance:
+#    instanceId: ${spring.application.name}:${vcap.application.instance_id:${spring.application.instance_id:${random.value}}}
+#
 
